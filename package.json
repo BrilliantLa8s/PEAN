@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Cocoa-Bean/CocoaPEAN/issues"
   },
-  "homepage": "https://github.com/Cocoa-Bean/CocoaPEAN#readme"
+  "homepage": "https://github.com/Cocoa-Bean/CocoaPEAN#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
