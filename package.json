@@ -1,0 +1,26 @@
+{
+  "name": "cocoapean",
+  "version": "1.0.0",
+  "description": "The stack that powers cocoabean.io",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cocoa-Bean/CocoaPEAN.git"
+  },
+  "keywords": [
+    "cocoabean",
+    "cocoapean",
+    "MEAN",
+    "Angular",
+    "Node"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Cocoa-Bean/CocoaPEAN/issues"
+  },
+  "homepage": "https://github.com/Cocoa-Bean/CocoaPEAN#readme"
+}
