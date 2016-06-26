@@ -10,3 +10,7 @@ app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $urlRouterProvider.otherwise('/');
 })
+
+app.controller('MainCtrl', function($scope) {
+
+})
