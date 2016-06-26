@@ -12,7 +12,8 @@ var dir = './client/'
 
 var paths = {
   styles:  [dir+'**/*.scss'],
-  scripts: [dir+'**/*.js']
+  scripts: [dir+'**/*.js'],
+  markup:  [dir+'**/*.html']
 };
 
 gulp.task('build:css', function() {
@@ -31,6 +32,11 @@ gulp.task('build:js', function() {
     .pipe(connect.reload());
 });
 
+gulp.task('reload:html', function(){
+  return gulp.src(paths.markup)
+    .pipe(connect.reload());
+})
+
 gulp.task('clean', function() {
   del.sync(dir+'concat.js');
   del.sync(dir+'concat.css');
@@ -39,6 +45,7 @@ gulp.task('clean', function() {
 gulp.task('watch', function() {
   gulp.watch(paths.styles,  ['build:css']);
   gulp.watch(paths.scripts, ['build:js']);
+  gulp.watch(paths.markup,  ['reload:html']);
 });
 
 gulp.task('serve', function () {
