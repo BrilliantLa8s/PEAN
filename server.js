@@ -3,7 +3,7 @@ var models = require('./api/models');
 var app = express();
 
 app.use(express.static('client'));
-app.use('/vendor', express.static('bower_components'));
+app.use('/api/vendor', express.static('bower_components'));
 
 app.set('port', process.env.PORT || 3000);
 
