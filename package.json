@@ -4,7 +4,10 @@
   "description": "The stack that powers cocoabean.io",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp start",
+    "db:seed": "node db/seeders/seed.js",
+    "db:reset": "gulp db:reset && npm run db:seed"
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,7 @@
     "gulp-connect": "^4.1.0",
     "gulp-nodemon": "^2.1.0",
     "gulp-sass": "^2.3.1",
+    "gulp-shell": "^0.5.2",
     "http-proxy-middleware": "^0.16.0",
     "run-sequence": "^1.2.1"
   }
