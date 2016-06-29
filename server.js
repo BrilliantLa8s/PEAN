@@ -5,6 +5,11 @@ var app = express();
 app.use(express.static('client'));
 app.use('/api/vendor', express.static('bower_components'));
 
+
+// API Controllers
+app.use('/api/posts', require('./api/controllers/posts'));
+
+// Serve app
 app.set('port', process.env.PORT || 3000);
 
 models.sequelize.sync().then(function () {
