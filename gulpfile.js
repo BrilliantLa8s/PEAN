@@ -19,7 +19,7 @@ var build = './client/build/'
 var vendor = require('./vendor.js');
 
 var paths = {
-  styles:  [src+'**/*.scss'],
+  styles:  [src+'styles.scss',src+'**/*.scss'],
   scripts: [src+'**/*.js'],
   markup:  [src+'**/*.html']
 };

@@ -1,0 +1,19 @@
+<!-- Main Nav -->
+<md-toolbar class="md-whiteframe-1dp">
+  <div class="container md-toolbar-tools navbar">
+    <a ui-sref="main" href="#" >
+      <span hide show-gt-sm>PEAN</span>
+    </a>
+    <span flex="5"></span>
+    <span layout="row" ng-if="!state('main')" ng-cloak>
+      <md-divider></md-divider>&nbsp;&nbsp;
+      <md-button ng-repeat="nav in main"
+        ui-sref-active="active" ui-sref="{{nav.state}}">
+        <md-icon ng-if="nav.icon">{{nav.icon}}</md-icon>
+        <span hide show-gt-sm>{{nav.link}}</span>
+        <md-tooltip hide-gt-sm>{{nav.link}}</md-tooltip>
+      </md-button>
+    </span>
+    <span flex></span>
+  </div>
+</md-toolbar>
