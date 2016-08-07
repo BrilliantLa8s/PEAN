@@ -2,7 +2,7 @@
   "development": {
     "username": "postgres",
     "password": "password",
-    "database": "cocoapean_development",
+    "database": "pean_development",
     "host": "127.0.0.1",
     "port": "5432",
     "dialect": "postgres"
@@ -10,7 +10,7 @@
   "test": {
     "username": "postgres",
     "password": "password",
-    "database": "cocoapean_test",
+    "database": "pean_test",
     "host": "127.0.0.1",
     "port": "5432",
     "dialect": "postgres"

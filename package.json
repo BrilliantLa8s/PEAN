@@ -1,7 +1,7 @@
 {
-  "name": "cocoapean",
+  "name": "pean",
   "version": "1.0.0",
-  "description": "The stack that powers cocoabean.io",
+  "description": "Brilliant Labs PEAN Stack",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,21 +11,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Cocoa-Bean/CocoaPEAN.git"
+    "url": "git+https://github.com/rickybrown/PEAN.git"
   },
   "keywords": [
-    "cocoabean",
-    "cocoapean",
+    "PEAN",
     "MEAN",
     "Angular",
-    "Node"
+    "Node",
+    "brilliant",
+    "labs"
   ],
-  "author": "Ricky Brown <ricky@brilliantdeveloping.com>",
+  "author": "Ricky Brown <ricky@brilliantlabs.co>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Cocoa-Bean/CocoaPEAN/issues"
+    "url": "https://github.com/rickybrown/PEAN/issues"
   },
-  "homepage": "https://github.com/Cocoa-Bean/CocoaPEAN#readme",
+  "homepage": "https://github.com/rickybrown/PEAN#readme",
   "dependencies": {
     "express": "^4.13.4",
     "pg": "^5.1.0",
