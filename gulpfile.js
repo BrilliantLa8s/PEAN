@@ -1,53 +1,83 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var shell = require('gulp-shell');
 var cleanCSS = require('gulp-clean-css');
+var uglify = require('gulp-uglify');
+var strip = require('gulp-strip-comments');
+var ngAnnotate = require('gulp-ng-annotate');
+var sourcemaps = require('gulp-sourcemaps');
+var templates = require('gulp-angular-templatecache');
 var concat = require('gulp-concat');
 var nodemon = require('gulp-nodemon');
 var connect = require('gulp-connect');
 var proxy = require('http-proxy-middleware');
+var shell = require('gulp-shell');
 var run = require('run-sequence');
 var del = require('del');
 
-var config = require('./config/config.json');
-var dir = './client/'
+var src = './client/src/'
+var build = './client/build/'
+var vendor = require('./vendor.js');
 
 var paths = {
-  styles:  [dir+'**/*.scss'],
-  scripts: [dir+'**/*.js'],
-  markup:  [dir+'**/*.html']
+  styles:  [src+'**/*.scss'],
+  scripts: [src+'**/*.js'],
+  markup:  [src+'**/*.html']
 };
 
-gulp.task('build:css', function() {
-  return gulp.src(paths.styles)
-    .pipe(sass().on('error', sass.logError))
-    .pipe(concat('concat.css'))
+gulp.task('build:vendor:css', function() {
+  return gulp.src(vendor.styles)
+    .pipe(concat('vendor.css'))
     .pipe(cleanCSS())
-    .pipe(gulp.dest(dir))
+    .pipe(gulp.dest(build))
+});
+
+gulp.task('build:vendor:js', function() {
+  return gulp.src(vendor.scripts)
+    .pipe(sourcemaps.init({loadMaps:true}))
+    .pipe(concat('vendor.js'))
+    .pipe(gulp.dest(build))
+});
+
+gulp.task('build:css', function() {
+  return gulp.src(paths.styles[0])
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat('app.css'))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest(build))
     .pipe(connect.reload());
 });
 
 gulp.task('build:js', function() {
   return gulp.src(paths.scripts)
-    .pipe(concat('concat.js'))
-    .pipe(gulp.dest(dir))
+    .pipe(strip())
+    .pipe(ngAnnotate())
+    .pipe(uglify({mangle:true}))
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest(build))
     .pipe(connect.reload());
 });
 
-gulp.task('reload:html', function(){
+gulp.task('build:html', function(){
   return gulp.src(paths.markup)
+    .pipe(templates({module:'app'}))
+    .pipe(gulp.dest(build))
     .pipe(connect.reload());
-})
+});
 
 gulp.task('clean', function() {
-  del.sync(dir+'concat.js');
-  del.sync(dir+'concat.css');
+  del.sync(build+'*');
 });
 
-gulp.task('watch', function() {
+gulp.task('watch:styles', function() {
   gulp.watch(paths.styles,  ['build:css']);
+});
+
+gulp.task('watch:scripts', function() {
   gulp.watch(paths.scripts, ['build:js']);
-  gulp.watch(paths.markup,  ['reload:html']);
+});
+
+gulp.task('watch:views', function() {
+  gulp.watch(paths.markup,  ['build:html']);
 });
 
 gulp.task('serve', function () {
@@ -56,10 +86,10 @@ gulp.task('serve', function () {
     ext:'js'
   });
   connect.server({
-    root: dir,
+    root: './client',
     port: '3001',
     livereload: true,
-    fallback: dir+'index.html',
+    fallback: './client/index.html',
     middleware: function (connect, opt) {
       return [
         proxy('/api', {
@@ -71,16 +101,38 @@ gulp.task('serve', function () {
   });
 });
 
-gulp.task('db:reset', shell.task([
-  'psql -U postgres -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = \'cxp_development\' AND pid <> pg_backend_pid()"',
-  'psql -U postgres -c "DROP DATABASE IF EXISTS '+config.development.database+'"',
-  'psql -U postgres -c "CREATE DATABASE '+config.development.database+' WITH OWNER = postgres"',
-  'sequelize db:migrate'
-]));
-
-gulp.task('build', ['clean', 'build:js', 'build:css']);
+gulp.task('build', ['clean', 'build:vendor:js', 'build:vendor:css', 'build:js', 'build:css', 'build:html']);
 gulp.task('default', ['build']);
+gulp.task('watch', ['watch:styles','watch:scripts','watch:views']);
 
 gulp.task('start', function(cb) {
   run('build', 'watch', 'serve', cb);
+});
+
+// Deploy
+var tag = 'deploy-' + new Date().getTime();
+
+gulp.task('branch', shell.task([
+    'git stash',
+    'git checkout --orphan '+tag,
+    'git add client/build -f',
+    'rm -rf client/src',
+    'git add .',
+    'git commit -am "commit for '+tag+'"'
+]));
+
+gulp.task('push:test', shell.task(['git push test '+tag+':master -f']));
+gulp.task('push:prod', shell.task(['git push prod '+tag+':master -f']));
+
+gulp.task('revert', shell.task([
+    'git checkout master',
+    'git checkout master .',
+    'git branch -D '+tag
+]));
+
+gulp.task('deploy:test', function(cb) {
+  run('build', 'branch', 'push:test', 'revert', cb);
+});
+gulp.task('deploy:production', function(cb) {
+  run('build', 'branch', 'push:prod', 'revert', cb);
 });
