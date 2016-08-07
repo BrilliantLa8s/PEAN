@@ -3,29 +3,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <base href="/">
   <!-- Angular Material style sheet -->
-  <link rel="stylesheet" href="api/vendor/angular-material/angular-material.min.css">
-  <link rel="stylesheet" href="concat.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="build/vendor.css">
+  <link rel="stylesheet" href="build/app.css">
 </head>
 <body ng-app="app" ng-cloak>
-
   <!-- Main View -->
   <div ui-view></div>
-
-  <!-- Angular.js Libraries -->
-  <script src="api/vendor/angular/angular.min.js"></script>
-  <script src="api/vendor/angular-animate/angular-animate.min.js"></script>
-  <script src="api/vendor/angular-aria/angular-aria.min.js"></script>
-  <script src="api/vendor/angular-messages/angular-messages.min.js"></script>
-  <script src="api/vendor/angular-ui-router/release/angular-ui-router.min.js"></script>
-
-  <!-- Angular Material Library -->
-  <script src="api/vendor/angular-material/angular-material.min.js"></script>
-
-  <!-- Angular App  -->
-  <script type="text/javascript">
-    var app = angular.module('app', ['ngMaterial', 'ui.router']);
-  </script>
-  <script src="concat.js"></script>
-
+  <!-- Angular Libraries -->
+  <script src="build/vendor.js"></script>
+  <!-- App  -->
+  <script src="build/app.js"></script>
+  <script src="build/templates.js"></script>
 </body>
 </html>
