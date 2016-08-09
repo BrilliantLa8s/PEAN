@@ -13,6 +13,7 @@ var proxy = require('http-proxy-middleware');
 var shell = require('gulp-shell');
 var run = require('run-sequence');
 var del = require('del');
+var config = require('./config/db.json')['development'];
 
 var src = './client/src/'
 var build = './client/build/'
@@ -101,6 +102,7 @@ gulp.task('serve', function () {
   });
 });
 
+// Main tasks
 gulp.task('build', ['clean', 'build:vendor:js', 'build:vendor:css', 'build:js', 'build:css', 'build:html']);
 gulp.task('default', ['build']);
 gulp.task('watch', ['watch:styles','watch:scripts','watch:views']);
@@ -109,25 +111,36 @@ gulp.task('start', function(cb) {
   run('build', 'watch', 'serve', cb);
 });
 
-// Deploy
+// Database tasks
+gulp.task('db:create', shell.task([
+  'psql -U postgres -c "CREATE DATABASE '+config.database+' WITH OWNER = '+config.username+'"'
+]));
+gulp.task('db:reset', shell.task([
+  'psql -U postgres -c "SELECT pg_terminate_backend(pg_stat_activity.pid) FROM pg_stat_activity WHERE pg_stat_activity.datname = \''+config.database+'\' AND pid <> pg_backend_pid()"',
+  'psql -U postgres -c "DROP DATABASE IF EXISTS '+config.database+'"',
+  'psql -U postgres -c "CREATE DATABASE '+config.database+' WITH OWNER = '+config.username+'"',
+  'sequelize db:migrate'
+]));
+
+// Deploy tasks
 var tag = 'deploy-' + new Date().getTime();
 
 gulp.task('branch', shell.task([
-    'git stash',
-    'git checkout --orphan '+tag,
-    'git add client/build -f',
-    'rm -rf client/src',
-    'git add .',
-    'git commit -am "commit for '+tag+'"'
+  'git stash',
+  'git checkout --orphan '+tag,
+  'git add client/build -f',
+  'rm -rf client/src',
+  'git add .',
+  'git commit -am "commit for '+tag+'"'
 ]));
 
 gulp.task('push:test', shell.task(['git push test '+tag+':master -f']));
 gulp.task('push:prod', shell.task(['git push prod '+tag+':master -f']));
 
 gulp.task('revert', shell.task([
-    'git checkout master',
-    'git checkout master .',
-    'git branch -D '+tag
+  'git checkout master',
+  'git checkout master .',
+  'git branch -D '+tag
 ]));
 
 gulp.task('deploy:test', function(cb) {
