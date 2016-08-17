@@ -5,9 +5,9 @@ var auth = require('../helpers/auth');
 var express = require('express');
 var router = express.Router();
 
-// Get current jwt payload object
+// Get current user
 router.get('/current', function(req, res){
-  res.status(200).send(req.user)
+  res.send(req.user)
 });
 
 // registration/login handling

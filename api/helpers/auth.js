@@ -3,6 +3,9 @@
 var jwt = require('jsonwebtoken');
 var auth = {};
 
+// whitelist public routes
+var publicApiPaths = ['auth']
+
 // login function
 auth.login = function(user, formPassword) {
   var defer = require('q').defer();
@@ -18,26 +21,25 @@ auth.login = function(user, formPassword) {
 }
 
 // Authenticate Requests
-auth.authenticateRequests = function(req,res,next) {
-  // Catchall route
-  if (req.originalUrl.split('/')[1] != 'api'){
-    res.sendFile('index.html', {'root': 'client'});
+auth.authenticateRequests = function(req, res, next){
+  // Check for auth token on other api requests
+  var token = req.headers.token
+  if (token) {
+    jwt.verify(token, 'superSecret', function(err, obj) {
+      if (err) {res.status(401).send(err);}
+      else {req.user = obj; next();};
+    });
   } else {
+    // Catchall route for non-api routes
+    if (req.originalUrl.split('/')[1] != 'api'){
+      res.sendFile('index.html', {'root': 'client'});
     // Allow public api requests
-    var publicApiPaths = ['auth']
-    if(publicApiPaths.indexOf(req.originalUrl.split('/')[2]) != -1){
+    } else if(publicApiPaths.indexOf(req.originalUrl.split('/')[2]) != -1) {
       next();
     } else {
-      // Check for auth token on other api requests
-      var token = req.headers.token
-      if(token) {
-        jwt.verify(token, 'superSecret', function(err, obj) {
-          if (err) {return res.status(401).send(err)}
-          else {req.user = obj; next();};
-        });
-      } else {return res.status(401).send('missing token')};
-    };
-  };
-}
+      res.status(401).send('missing token');
+    }
+  }
+};
 
 module.exports = auth;

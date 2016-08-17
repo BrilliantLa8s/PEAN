@@ -10,7 +10,7 @@ app.factory('Auth', function($http, $localStorage){
     },
     // Get Current User
     current: function(){
-      return $http.get('api/auth/current')
+      return $http.get('/api/auth/current')
       .then(function(resp){return resp})
       .catch(function(err){return err});
     },
