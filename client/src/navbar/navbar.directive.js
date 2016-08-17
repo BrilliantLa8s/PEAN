@@ -4,6 +4,11 @@ app.controller('NavbarCtrl', function($scope) {
       link: 'Home',
       state: 'main',
       icon: ''
+    },
+    {
+      link: 'Posts',
+      state: 'posts',
+      icon: ''
     }
   ];
 }).directive('navbar', function() {

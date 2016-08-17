@@ -5,8 +5,7 @@
       <span hide show-gt-sm>PEAN</span>
     </a>
     <span flex="5"></span>
-    <span layout="row" ng-if="!state('main')" ng-cloak>
-      <md-divider></md-divider>&nbsp;&nbsp;
+    <span layout="row">
       <md-button ng-repeat="nav in main"
         ui-sref-active="active" ui-sref="{{nav.state}}">
         <md-icon ng-if="nav.icon">{{nav.icon}}</md-icon>
@@ -15,5 +14,6 @@
       </md-button>
     </span>
     <span flex></span>
+    <span layout="row" ng-include="'auth/_authmenu.html'"></span>
   </div>
 </md-toolbar>

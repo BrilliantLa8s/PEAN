@@ -1,0 +1,42 @@
+<div class="auth-container">
+<md-card>
+  <md-card-content>
+  <h1>Sign up now, it's free</h1>
+  <div flex class="auth-form" ng-controller="AuthCtrl">
+    <form ng-submit="authenticate(creds)" ng-init="creds.type='register'" role="form">
+      <md-input-container md-no-float class="md-block">
+        <input type="email"
+               name="email"
+               id="email"
+               ng-model="creds.email"
+               placeholder="Email Address"
+               autofocus="true"/>
+      </md-input-container>
+      <md-input-container md-no-float class="md-block">
+        <input type="password"
+               name="password"
+               id="password"
+               ng-model="creds.password"
+               placeholder="Choose Password"/>
+      </md-input-container>
+      <md-input-container md-no-float class="md-block">
+        <input type="password"
+               name="password_confirmation"
+               id="password_confirmation"
+               ng-model="creds.password_confirmation"
+               placeholder="Confirm Password"/>
+      </md-input-container>
+      <md-input-container md-no-float class="md-block">
+        <md-button type="submit" class="block md-raised md-primary">Sign Up</md-button>
+      </md-input-container>
+    </form>
+  </div>
+  </md-card-content>
+</md-card>
+<br/>
+<md-card class="other-links">
+  <md-card-content layout="row" layout-align="center center">
+    <a flex ui-sref="login" class="help">Already registered? Sign in!</a>
+  </md-card-content>
+</md-card>
+</div>

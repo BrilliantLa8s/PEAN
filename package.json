@@ -36,8 +36,10 @@
     "body-parser": "^1.15.2",
     "express": "^4.13.4",
     "jsonwebtoken": "^7.1.7",
+    "ngstorage": "^0.3.11",
     "pg": "^5.1.0",
     "pg-hstore": "^2.3.2",
+    "q": "^1.4.1",
     "sequelize": "^3.23.3"
   },
   "devDependencies": {

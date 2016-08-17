@@ -1,0 +1,36 @@
+<div class="auth-container">
+  <md-card>
+    <md-card-content>
+      <div class="auth-form" ng-controller="AuthCtrl">
+        <h1>Sign into your account</h1>
+        <form ng-submit="authenticate(creds)" ng-init="creds.type='login'" role="form">
+          <md-input-container md-no-float class="md-block">
+            <input type="email"
+                   name="email"
+                   id="email"
+                   ng-model="creds.email"
+                   placeholder="Email Address"
+                   autofocus="true"/>
+          </md-input-container>
+          <md-input-container md-no-float class="md-block">
+            <input type="password"
+                   name="password"
+                   id="password"
+                   ng-model="creds.password"
+                   placeholder="Password"/>
+          </md-input-container>
+          <md-input-container md-no-float class="md-block">
+            <md-button type="submit" class="block md-raised md-primary">Sign In</md-button>
+          </md-input-container>
+        </form>
+      </div>
+    </md-card-content>
+  </md-card>
+  <br/>
+  <md-card class="other-links">
+    <md-card-content layout="row" layout-align="center center">
+      <a flex href="" ui-sref="register" class="help">Not registered yet?</a>
+      <a flex href="" ui-sref="register" class="help">Forgot password?</a>
+    </md-card-content>
+  </md-card>
+</div>
