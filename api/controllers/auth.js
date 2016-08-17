@@ -20,18 +20,21 @@ router.post('/authenticate', function(req, res) {
       if(user){
         console.log('already registered')
         res.status(404).send('This email address is already registered');
+      } else if(req.body.password != req.body.password_confirmation) {
+        res.status(404).send('Passwords do not match')
       } else {
         model.User.create({
           email: req.body.email,
           password: req.body.password
         }).then(function(user){
-          auth.login(user.dataValues, req.body.password).then(function(resp){
-            res.status(200).send('User is registered and logged in');
+          auth.login(user.dataValues, req.body.password).then(function(token){
+            res.status(200).send(token);
           }).catch(function(err){
-            console.log(err)
+            res.status(404).send(err);
           });
         }).catch(function(err){
-          res.status(404).send('Could not register user');
+          console.log(err)
+          res.status(404).send('Enter a valid email and password');
         });
       }
     } else if(req.body.type === 'login'){
@@ -39,7 +42,7 @@ router.post('/authenticate', function(req, res) {
         auth.login(user.dataValues, req.body.password).then(function(token){
           res.status(200).send(token);
         }).catch(function(err){
-          res.status(404).send('Could not log user in');
+          res.status(404).send(err);
         });
       } else {
         res.status(404).send('This email address is not registered');

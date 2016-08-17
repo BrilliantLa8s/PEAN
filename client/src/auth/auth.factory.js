@@ -5,7 +5,7 @@ app.factory('Auth', function($http, $localStorage){
       return $http.post('/api/auth/authenticate', creds)
       .then(function(resp){
         $localStorage.token = resp.data;
-        return;
+        return resp;
       }).catch(function(err){return err});
     },
     // Get Current User

@@ -9,8 +9,9 @@ var publicApiPaths = ['auth']
 // login function
 auth.login = function(user, formPassword) {
   var defer = require('q').defer();
+  if (formPassword === undefined) defer.reject('Enter your password')
   if (user.password != formPassword) {
-    defer.reject('Authentication failed. Wrong password.');
+    defer.reject('Wrong credentials. Try again');
   } else {
     var token = jwt.sign(user, 'superSecret', {
       expiresIn: 1440 // expires in 24 hours

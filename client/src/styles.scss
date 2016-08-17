@@ -10,6 +10,10 @@ body {
 
 }
 
+.error {
+  color:red;
+}
+
 @import 'main/main';
 @import 'auth/auth';
 @import 'navbar/navbar';

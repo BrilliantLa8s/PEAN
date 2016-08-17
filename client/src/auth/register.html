@@ -5,6 +5,9 @@
   <div flex class="auth-form" ng-controller="AuthCtrl">
     <form ng-submit="authenticate(creds)" ng-init="creds.type='register'" role="form">
       <md-input-container md-no-float class="md-block">
+        <div class="error" ng-show="error">{{error}}</div>
+      </md-input-container>
+      <md-input-container md-no-float class="md-block">
         <input type="email"
                name="email"
                id="email"
