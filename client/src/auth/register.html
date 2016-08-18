@@ -13,21 +13,24 @@
                id="email"
                ng-model="creds.email"
                placeholder="Email Address"
-               autofocus="true"/>
+               autofocus="true"
+               required/>
       </md-input-container>
       <md-input-container md-no-float class="md-block">
         <input type="password"
                name="password"
                id="password"
                ng-model="creds.password"
-               placeholder="Choose Password"/>
+               placeholder="Choose Password"
+               required/>
       </md-input-container>
       <md-input-container md-no-float class="md-block">
         <input type="password"
                name="password_confirmation"
                id="password_confirmation"
                ng-model="creds.password_confirmation"
-               placeholder="Confirm Password"/>
+               placeholder="Confirm Password"
+               required/>
       </md-input-container>
       <md-input-container md-no-float class="md-block">
         <md-button type="submit" class="block md-raised md-primary">Sign Up</md-button>
