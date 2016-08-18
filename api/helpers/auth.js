@@ -1,5 +1,8 @@
 'use strict';
 
+var env = process.env.NODE_ENV || 'development';
+var config = require('../../config/app')[env];
+
 var jwt = require('jsonwebtoken');
 var auth = {};
 
@@ -13,7 +16,7 @@ auth.login = function(user, formPassword) {
   if (user.password != formPassword) {
     defer.reject('Wrong credentials. Try again');
   } else {
-    var token = jwt.sign(user, 'superSecret', {
+    var token = jwt.sign(user, config.secret, {
       expiresIn: 1440 // expires in 24 hours
     });
     defer.resolve(token);
@@ -26,7 +29,7 @@ auth.authenticateRequests = function(req, res, next){
   // Check for auth token on other api requests
   var token = req.headers.token
   if (token) {
-    jwt.verify(token, 'superSecret', function(err, obj) {
+    jwt.verify(token, config.secret, function(err, obj) {
       if (err) {res.status(401).send(err);}
       else {req.user = obj; next();};
     });

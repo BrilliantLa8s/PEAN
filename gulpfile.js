@@ -149,3 +149,7 @@ gulp.task('deploy:test', function(cb) {
 gulp.task('deploy:production', function(cb) {
   run('build', 'branch', 'push:prod', 'revert', cb);
 });
+
+
+// lib tasks
+gulp.task('lib:secret', shell.task(['node lib/secret.js']));
