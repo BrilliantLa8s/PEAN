@@ -1,4 +1,4 @@
-app.factory('Auth', function($http, $localStorage){
+app.factory('Auth', function($http, $localStorage, $q){
   return {
     // Register/Login
     authenticate: function(creds){
@@ -16,8 +16,12 @@ app.factory('Auth', function($http, $localStorage){
     },
     // Logout/Remove token from storage
     logout: function(){
-      delete $localStorage.token;
-      return 'user logged out';
+      return $q(function(resolve, reject){
+        delete $localStorage.token;
+        if(!$localStorage.token){
+          resolve('token deleted');
+        } else {reject('could not delete token')};
+      })
     }
   }
 });

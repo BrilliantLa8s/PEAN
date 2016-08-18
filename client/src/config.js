@@ -31,8 +31,9 @@ app.config(function($locationProvider, $sceProvider, $stateProvider, $urlRouterP
   .state('logout', {
     url:'/logout',
     templateProvider: function(Auth, $state){
-      Auth.logout();
-      $state.go('main');
+      Auth.logout().then(function(){
+        $state.reload();
+      }).catch(function(err){console.log(err)})
     }
   });
 
