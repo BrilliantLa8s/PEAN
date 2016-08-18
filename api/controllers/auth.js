@@ -2,6 +2,8 @@
 
 var model = require('../models/index');
 var auth = require('../helpers/auth');
+var vars = require('../../config/vars');
+var bcrypt = require('bcryptjs');
 var express = require('express');
 var router = express.Router();
 
@@ -18,14 +20,13 @@ router.post('/authenticate', function(req, res) {
     // Register a new user
     if(req.body.type === 'register'){
       if(user){
-        console.log('already registered')
         res.status(404).send('This email address is already registered');
       } else if(req.body.password != req.body.password_confirmation) {
         res.status(404).send('Passwords do not match')
       } else {
         model.User.create({
           email: req.body.email,
-          password: req.body.password
+          password: bcrypt.hashSync(req.body.password, vars.bcrypt.salt)
         }).then(function(user){
           auth.login(user.dataValues, req.body.password).then(function(token){
             res.status(200).send(token);

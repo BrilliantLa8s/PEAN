@@ -4,6 +4,7 @@ var env = process.env.NODE_ENV || 'development';
 var config = require('../../config/app')[env];
 
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcryptjs');
 var auth = {};
 
 // whitelist public routes
@@ -12,14 +13,14 @@ var publicApiPaths = ['auth']
 // login function
 auth.login = function(user, formPassword) {
   var defer = require('q').defer();
-  if (formPassword === undefined) defer.reject('Enter your password')
-  if (user.password != formPassword) {
-    defer.reject('Wrong credentials. Try again');
-  } else {
+  if(formPassword === undefined) defer.reject('Enter your password')
+  if(bcrypt.compareSync(formPassword, user.password)) {
     var token = jwt.sign(user, config.secret, {
       expiresIn: 1440 // expires in 24 hours
     });
     defer.resolve(token);
+  } else {
+    defer.reject('Wrong credentials. Try again');
   }
   return defer.promise;
 }
