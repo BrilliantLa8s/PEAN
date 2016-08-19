@@ -11,8 +11,17 @@ app.factory('Auth', function($http, $localStorage, $q){
     // Get Current User
     current: function(){
       return $http.get('/api/auth/current')
-      .then(function(resp){return resp})
-      .catch(function(err){return err});
+      .then(function(resp){
+        if(resp.status == 200){
+          return resp.data
+        } else {
+          delete $localStorage.token;
+          return {};
+        };
+      }).catch(function(err){
+        delete $localStorage.token;
+        return err;
+      });
     },
     // Logout/Remove token from storage
     logout: function(){

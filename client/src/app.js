@@ -6,11 +6,9 @@ app.run(function($rootScope, Auth){
    $rootScope.$on('$stateChangeStart',function(){
      // check for current user
      Auth.current().then(function(user){
-       if(user.status === 200){
-         $rootScope.currentUser = user.data
-       } else {console.log(user.data.message)};
+       $rootScope.currentUser = user
      }).catch(function(err){
-       $rootScope.currentUser = false
+       $rootScope.currentUser = {}
      });
    });
 });
