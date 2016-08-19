@@ -6,15 +6,20 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider){
     templateUrl: 'main/main.html',
     controller: 'MainCtrl'
   })
+  .state('admin', {
+    url:'/admin',
+    templateUrl: 'admin/admin.html',
+    controller: 'AdminCtrl'
+  })
   .state('posts', {
     url:'/posts',
     templateUrl: 'posts/posts.html',
     controller: 'PostsCtrl'
   })
-  .state('users', {
-    url:'/users',
-    templateUrl: 'users/users.html',
-    controller: 'UsersCtrl'
+  .state('profile', {
+    url:'/profile',
+    templateUrl: 'users/profile.html',
+    controller: 'ProfileCtrl'
   })
   .state('account', {
     url:'/account',

@@ -7,10 +7,28 @@
   </md-button>
 </span>
 <span layout="row" ng-show="currentUser">
-  <md-button ui-sref-active="active">
-    <span hide show-gt-sm>{{currentUser.email}}</span>
-  </md-button>
+  <md-menu md-position-mode="target-right target">
+    <md-button ui-sref-active="active" ng-click="$mdOpenMenu($event)">
+      <span hide show-gt-sm>{{currentUser.email}}</span>
+    </md-button>
+    <md-menu-content width="3">
+      <md-menu-item>
+        <md-button ui-sref-active="active" ui-sref="profile">
+          <span hide show-gt-sm>Profile</span>
+        </md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ui-sref-active="active" ui-sref="account">
+          <span hide show-gt-sm>Account</span>
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
   <md-button ui-sref-active="active" ui-sref="logout">
     <span hide show-gt-sm>Logout</span>
+  </md-button>
+  <md-button ui-sref-active="active" ui-sref="admin"
+    class="md-raised" ng-if="currentUser.admin">
+    <span hide show-gt-sm>Admin</span>
   </md-button>
 </span>
