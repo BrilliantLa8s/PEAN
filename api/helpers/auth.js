@@ -14,6 +14,7 @@ var publicApiPaths = ['auth']
 auth.login = function(user, formPassword) {
   var defer = require('q').defer();
   if(bcrypt.compareSync(formPassword, user.password)) {
+    delete user.password
     var token = jwt.sign(user, config.secret, {
       expiresIn: 1440 // expires in 24 hours
     });
