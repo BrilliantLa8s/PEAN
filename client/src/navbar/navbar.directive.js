@@ -1,5 +1,5 @@
 app.controller('NavbarCtrl', function($scope) {
-  $scope.main = [
+  $scope.mainmenu = [
     {
       link: 'Home',
       state: 'main',
@@ -9,6 +9,24 @@ app.controller('NavbarCtrl', function($scope) {
       link: 'Posts',
       state: 'posts',
       icon: ''
+    }
+  ];
+  // Authmenu
+  $scope.authmenu = [
+    {
+      link: 'Profile',
+      state: 'profile',
+      icon: 'assignment_ind'
+    },
+    {
+      link: 'Account',
+      state: 'account',
+      icon: 'settings'
+    },
+    {
+      link: 'Logout',
+      state: 'logout',
+      icon: 'person'
     }
   ];
 }).directive('navbar', function() {

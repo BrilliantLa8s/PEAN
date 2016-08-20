@@ -6,7 +6,7 @@
     </a>
     <span flex="5"></span>
     <span layout="row">
-      <md-button ng-repeat="nav in main"
+      <md-button ng-repeat="nav in mainmenu"
         ui-sref-active="active" ui-sref="{{nav.state}}">
         <md-icon ng-if="nav.icon">{{nav.icon}}</md-icon>
         <span hide show-gt-sm>{{nav.link}}</span>

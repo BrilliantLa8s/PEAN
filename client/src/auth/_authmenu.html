@@ -9,26 +9,23 @@
 <span layout="row" ng-show="currentUser">
   <md-menu md-position-mode="target-right target">
     <md-button ui-sref-active="active" ng-click="$mdOpenMenu($event)">
+      <md-icon hide-gt-sm>account_circle</md-icon>
       <span hide show-gt-sm>{{currentUser.email}}</span>
     </md-button>
     <md-menu-content width="3">
-      <md-menu-item>
-        <md-button ui-sref-active="active" ui-sref="profile">
-          <span hide show-gt-sm>Profile</span>
+      <md-menu-item ng-repeat="nav in authmenu">
+        <md-button ui-sref-active="active" ui-sref="{{nav.state}}">
+          <md-icon>{{nav.icon}}</md-icon>
+          <span hide show-gt-sm>{{nav.link}}</span>
         </md-button>
       </md-menu-item>
-      <md-menu-item>
-        <md-button ui-sref-active="active" ui-sref="account">
-          <span hide show-gt-sm>Account</span>
+      <md-divider ng-if="currentUser.admin"></md-divider>
+      <md-menu-item ng-if="currentUser.admin">
+        <md-button ui-sref-active="active" ui-sref="admin">
+          <md-icon>supervisor_account</md-icon>
+          <span hide show-gt-sm>Admin</span>
         </md-button>
       </md-menu-item>
     </md-menu-content>
   </md-menu>
-  <md-button ui-sref-active="active" ui-sref="logout">
-    <span hide show-gt-sm>Logout</span>
-  </md-button>
-  <md-button ui-sref-active="active" ui-sref="admin"
-    class="md-raised" ng-if="currentUser.admin">
-    <span hide show-gt-sm>Admin</span>
-  </md-button>
 </span>
