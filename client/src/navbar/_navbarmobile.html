@@ -1,0 +1,21 @@
+<md-sidenav no-select class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+  <md-subheader class="md-no-sticky">
+    <span layout="row" layout-align="center center">
+      MENU <span flex></span>
+      <a href="" ng-click="closeLeft()">
+        <md-icon>exit_to_app</md-icon>
+      </a>
+    </span>
+  </md-subheader>
+  <md-content>
+    <md-list >
+      <md-list-item ng-repeat="nav in mainmenu">
+        <span stretch pointer ng-click="closeLeft()" ui-sref="{{nav.state}}">
+          <p>{{nav.link}}</p>
+          <md-icon class="md-secondary">{{nav.icon}}</md-icon>
+        </span>
+      </md-list-item>
+      <md-divider></md-divider>
+    </md-list>
+  </md-content>
+</md-sidenav>

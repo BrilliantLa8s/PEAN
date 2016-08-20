@@ -14,6 +14,24 @@ body {
   color:red;
 }
 
+*[no-select] {
+     -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer */
+   -khtml-user-select: none; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: none; /* Chrome, Safari, and Opera */
+-webkit-touch-callout: none; /* Disable Android and iOS callouts*/
+}
+*[pointer] {
+  cursor:pointer;
+}
+*:focus {
+  outline: none;
+  // border: 0;
+}
+*[stretch] {
+  width:100%;
+}
+
 @import 'main/main';
 @import 'auth/auth';
 @import 'navbar/navbar';
