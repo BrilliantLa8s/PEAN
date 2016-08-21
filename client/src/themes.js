@@ -45,5 +45,5 @@ app.config(function($mdThemingProvider) {
     'A700': '#fff',
     'contrastDefaultColor': 'dark'
   });
-  return $mdThemingProvider.theme('default').primaryPalette('white').accentPalette('theme2').warnPalette('theme6');
+  return $mdThemingProvider.theme('default').primaryPalette('blue').accentPalette('theme2').warnPalette('theme6');
 });

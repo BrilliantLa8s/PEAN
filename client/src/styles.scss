@@ -31,6 +31,18 @@ body {
 *[stretch] {
   width:100%;
 }
+md-progress-circular {
+  position:fixed;
+  margin-top:-65px;
+  width:100%!important;
+  height:100%!important;
+  background: rgba(255,255,255,0.8);
+  & svg {
+    position:relative;
+    left:calc(50% - 25px);
+    top:42%;
+  }
+}
 
 @import 'main/main';
 @import 'auth/auth';
