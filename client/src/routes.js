@@ -26,6 +26,15 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider){
     templateUrl: 'users/account.html',
     controller: 'AccountCtrl'
   })
+  .state('identity', {
+    url:'/identity/:id',
+    templateProvider: function($http, $state, $stateParams){
+      $http.post('/api/identities/finish',
+      {id:$stateParams.id}).then(function(resp){
+        $state.go('profile');
+      }).catch(function(err){console.log(err)})
+    }
+  })
   .state('register', {
     url:'/register',
     templateUrl: 'auth/register.html'

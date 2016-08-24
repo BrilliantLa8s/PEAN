@@ -41,6 +41,7 @@
     "pg": "^5.1.0",
     "pg-hstore": "^2.3.2",
     "q": "^1.4.1",
+    "request": "^2.74.0",
     "sequelize": "^3.23.3"
   },
   "devDependencies": {
