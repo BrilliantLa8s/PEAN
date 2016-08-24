@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "del": "^2.2.0",
+    "dotenv": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-angular-templatecache": "^2.0.0",
     "gulp-clean-css": "^2.0.10",

@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 var bodyParser = require('body-parser');
 var models = require('./api/models');
 var auth = require('./api/helpers/auth');
