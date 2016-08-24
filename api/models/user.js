@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         models.User.hasMany(models.Post);
+        models.User.hasMany(models.Identity);
       }
     }
   });

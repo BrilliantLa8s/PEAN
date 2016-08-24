@@ -14,10 +14,11 @@ router.get('/', function(req, res){
 });
 
 // Get user by parameter
-router.get('/:id', function(req, res){
+router.get('/profile', function(req, res){
   model.User.findOne({
     attributes:{exclude:['password']},
-    where:{id:req.params.id}
+    where:{id:req.user.id},
+    include:[model.Identity]
   }).then(function(user) {
     res.status(200).send(user);
   });
