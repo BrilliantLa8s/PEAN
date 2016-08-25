@@ -1,20 +1,38 @@
-Connected Identities:
-<div ng-repeat="identity in user.Identities">
-  <h3 ng-bind="identity.provider"></h3>
-  <div ng-if="identity.provider == 'instagram'">
-    <p ng-bind="identity.userInfo.username"></p>
-    <p ng-bind="identity.userInfo.full_name"></p>
-    <img ng-src="{{identity.userInfo.profile_picture}}">
+<md-content class="md-padding" layout-xs="column" layout="row">
+  <div flex-xs flex-gt-xs="50" layout="column">
+    Connect Identity:
+    <div ng-repeat="provider in providers">
+      <md-button ng-click="addIdentity(provider)"
+      ng-disabled="connected.indexOf(provider)!=-1">
+        {{provider}}
+      </md-button>
+    </div>
   </div>
-  <div ng-if="identity.provider == 'facebook'">
-    <p ng-bind="identity.userInfo.name"></p>
-    <p ng-bind="identity.userInfo.email"></p>
-    <img ng-src="{{identity.userInfo.profile_picture}}">
+  <div flex-xs flex-gt-xs="50" layout="column">
+    Connected Identities:
+    <div ng-repeat="identity in user.Identities">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text ng-if="identity.provider == 'instagram'">
+            <span class="md-headline" ng-bind="identity.provider"></span>
+            <span class="md-subhead" ng-bind="identity.userInfo.username"></span>
+            <span class="md-subhead" ng-bind="identity.userInfo.full_name"></span>
+          </md-card-title-text>
+          <md-card-title-text ng-if="identity.provider == 'facebook'">
+            <span class="md-headline" ng-bind="identity.provider"></span>
+            <span class="md-subhead" ng-bind="identity.userInfo.name"></span>
+            <span class="md-subhead" ng-bind="identity.userInfo.email"></span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-sm card-media">
+              <img ng-src="{{identity.userInfo.profile_picture}}">
+            </div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button ng-click="removeIdentity(identity.provider, $index)">Remove Identity</md-button>
+        </md-card-actions>
+      </md-card>
+    </div>
   </div>
-  <md-button ng-click="removeIdentity(identity.provider, $index)">Remove Identity</md-button>
 </div>
-
-<br><br>
-Connect Identity:
-<md-button ng-click="addIdentity('instagram')">Instagram</md-button>
-<md-button ng-click="addIdentity('facebook')">Facebook</md-button>
