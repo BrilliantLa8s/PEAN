@@ -1,5 +1,5 @@
 module.exports = {
   bcrypt: {
-    salt: 10
+    salt: 12
   }
 }
