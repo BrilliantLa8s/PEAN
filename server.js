@@ -5,8 +5,11 @@ require('dotenv').config();
 var bodyParser = require('body-parser');
 var models = require('./api/models');
 var auth = require('./api/helpers/auth');
+var cors = require('cors');
 var express = require('express');
 var app = express();
+
+app.use(cors());
 
 // Parse body as JSON
 app.use(bodyParser.json());
