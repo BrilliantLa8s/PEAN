@@ -35,11 +35,21 @@ auth.authenticateRequests = function(req, res, next){
       else {req.user = obj; next();};
     });
   } else {
+    if (process.env.DEV_USER) {
+      req.user = {
+        email: 'dev@user.com',
+        username: 'DevUser',
+        admin: false,
+        id: 1
+      };
+    }
     // Catchall route for non-api routes
     if (req.originalUrl.split('/')[1] != 'api'){
       res.sendFile('index.html', {'root': 'client'});
     // Allow public api requests
-    } else if(publicApiPaths.indexOf(req.originalUrl.split('/')[2]) != -1) {
+    } else if (publicApiPaths.indexOf(req.originalUrl.split('/')[2]) != -1) {
+      next();
+    } else if (req.user) {
       next();
     } else {
       res.status(401).send(error.auth.log.token);
