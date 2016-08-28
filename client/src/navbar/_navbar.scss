@@ -1,20 +1,15 @@
 .md-toolbar-tools.navbar {
   padding:0;
-  &.contain {
-    padding:0 30px;
-  }
   & md-icon[account] {
     font-size:34px;
     top:-7px;
   }
   & .brand {
-    padding:0 20px;
-  }
-  & .pad-right {
-    padding-right:10px;
+    padding:0 20px 0 5px;
   }
   & .md-button {
     min-width:0;
+    // margin:6px 0 6px 16px;
     &.active {
       // color:$theme2;
       // background:#fff;
@@ -38,7 +33,11 @@
 
 // Sidenavs
 md-sidenav {
+  min-width: 60px;
   & md-list-item {
-    padding:0 15px;
+    // padding:0 15px;
+    & .md-button {
+      min-width:0;
+    }
   }
 }
