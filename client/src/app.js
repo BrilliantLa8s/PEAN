@@ -2,7 +2,7 @@ angular.module('app', ['ui.router', 'ngMaterial', 'ngStorage']);
 
 var app = angular.module('app');
 
-app.run(function($rootScope, Auth){
+app.run(function($rootScope, Auth, $mdMedia){
   $rootScope.providers = ['instagram', 'facebook']
   $rootScope.$on('$stateChangeStart',function(){
     // check for current user
@@ -17,5 +17,8 @@ app.run(function($rootScope, Auth){
   });
   $rootScope.$on('loading:finish', function (){
     $rootScope.isLoading = false;
+  });
+  $rootScope.$watch(function() {return $mdMedia('xs');}, function(xs) {
+    $rootScope.mobile = (xs ? true : false)
   });
 });
