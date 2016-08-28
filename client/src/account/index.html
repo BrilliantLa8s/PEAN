@@ -1,0 +1,35 @@
+<div class="container">
+  <div layout="row" class="md-whiteframe-z2" id="account">
+    <md-sidenav no-select flex-xs="15" flex-gt-xs="20"
+      class="md-sidenav-left"
+      md-component-id="account"
+      md-is-locked-open="true">
+      <md-subheader class="md-no-sticky">
+        <span layout="row" layout-align="space-between center" hide show-gt-xs>
+          ACCOUNT<span flex></span>
+          <md-icon>settings</md-icon>
+        </span>
+        <span layout="row" hide-gt-xs>
+          <md-icon>settings</md-icon>
+        </span>
+      </md-subheader>
+      <md-content>
+        <md-list>
+          <md-list-item ng-repeat="nav in accountmenu">
+            <md-button flex ui-sref="{{nav.state}}">
+              <md-icon hide-gt-xs>{{nav.icon}}</md-icon>
+              <span layout="row" hide show-gt-xs>
+                {{nav.link}}
+                <span flex></span>
+                <md-icon>{{nav.icon}}</md-icon>
+              </span>
+            </md-button>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-sidenav>
+    <div flex-xs="85" flex-gt-xs="80">
+      <div ui-view></div>
+    </div>
+  </div>
+</div>

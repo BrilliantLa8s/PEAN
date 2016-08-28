@@ -1,0 +1,18 @@
+#account {
+  @media(min-width:600px) {
+    margin:20px 0;
+  }
+  & md-sidenav {
+    overflow:hidden;
+    z-index:1;
+    border-right:1px solid $theme1;
+    & .md-subheader {
+      background:transparent;
+      border-bottom:1px solid #eee;
+    }
+    & .md-button {
+      text-transform:initial;
+      color:#555;
+    }
+  }
+}
