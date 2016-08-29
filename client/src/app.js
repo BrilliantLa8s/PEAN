@@ -3,7 +3,7 @@ angular.module('app', ['ui.router', 'ngMaterial', 'ngStorage']);
 var app = angular.module('app');
 
 app.run(function($rootScope, Auth, $mdMedia){
-  $rootScope.providers = ['instagram', 'facebook']
+  $rootScope.providers = ['instagram', 'facebook', 'twitter']
   $rootScope.$on('$stateChangeStart',function(){
     // check for current user
     Auth.current().then(function(user){

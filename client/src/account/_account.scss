@@ -16,3 +16,21 @@
     }
   }
 }
+md-menu-item >.md-button.identities md-icon {
+  margin:auto 0;
+}
+#identities {
+  & .md-menu {
+    padding:0;
+  }
+  & md-list {
+    margin-right:10px;
+    & md-list-item {
+      & .md-button {
+        &:hover {
+          background:transparent;
+        }
+      }
+    }
+  }
+}

@@ -38,6 +38,9 @@ md-sidenav {
     // padding:0 15px;
     & .md-button {
       min-width:0;
+      margin:0;
+      padding: 5px 15px;
+      border-radius:0;
     }
   }
 }

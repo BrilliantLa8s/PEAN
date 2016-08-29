@@ -9,7 +9,7 @@ app.controller('AccountCtrl', function($http, $window, $scope, $rootScope, Resou
     {
       link: 'Identities',
       state: 'account.identities',
-      icon: 'person_add'
+      icon: 'group_add'
     },
     {
       link: 'Settings',
