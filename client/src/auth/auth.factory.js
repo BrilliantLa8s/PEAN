@@ -26,6 +26,7 @@ app.factory('Auth', function($http, $localStorage, $q){
     // Logout/Remove token from storage
     logout: function(){
       return $q(function(resolve, reject){
+        delete $localStorage.currentUser;
         delete $localStorage.token;
         if(!$localStorage.token){
           resolve('token deleted');

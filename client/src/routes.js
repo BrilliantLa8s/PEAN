@@ -67,7 +67,7 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider){
     url:'/logout',
     templateProvider: function(Auth, $state){
       Auth.logout().then(function(){
-        $state.reload();
+        $state.go('login');
       }).catch(function(err){console.log(err)})
     }
   });
