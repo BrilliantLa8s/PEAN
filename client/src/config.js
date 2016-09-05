@@ -28,7 +28,7 @@ app.config(function($sceProvider, $httpProvider){
       responseError: function(response) {
         $rootScope.$broadcast('loading:finish');
         if(response.status === 401 || response.status === 403) {
-          $location.path('/login');
+          $location.path('/logout');
         }
         return $q.reject(response);
       }
