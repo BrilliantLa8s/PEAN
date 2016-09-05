@@ -33,17 +33,17 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider){
   })
   .state('account.identities', {
     url:'/identities',
-    templateUrl: 'account/identities.html',
+    templateUrl: 'account/identities/identities.html',
     controller: 'IdentitiesCtrl'
   })
   .state('account.settings', {
     url:'/settings',
-    templateUrl: 'account/settings.html',
+    templateUrl: 'account/settings/settings.html',
     controller: 'AccountCtrl'
   })
   .state('account.support', {
     url:'/support',
-    templateUrl: 'account/support.html',
+    templateUrl: 'account/support/support.html',
     controller: 'AccountCtrl'
   })
   .state('identity', {
