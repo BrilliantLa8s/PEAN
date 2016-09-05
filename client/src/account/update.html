@@ -1,0 +1,52 @@
+<div id="update">
+  <md-subheader class="md-no-sticky">
+    <div class="md-subhead">Edit Account Information</div>
+  </md-subheader>
+  <md-divider></md-divider>
+  <md-subheader class="md-no-sticky" hide show-gt-xs>
+    <div class="md-subhead">Change Registration Details:</div>
+  </md-subheader>
+  <div class="card-buttons" layout="column" hide show-gt-xs
+    layout-gt-sm="row" layout-align="space-between stretch">
+    <div flex-gt-sm="60" layout="row">
+      <md-card flex ng-click="dialog('email')"
+        md-colors="{color:'primary'}">
+        Email<md-icon md-colors="{color:'primary'}">email</md-icon>
+      </md-card>
+      <md-card flex ng-click="dialog('password')">
+        Password<md-icon>vpn_key</md-icon>
+      </md-card>
+      <md-card flex ng-click="dialog('cc')">
+        Card<md-icon>credit_card</md-icon>
+      </md-card>
+    </div>
+    <md-card flex-gt-sm="40" hide show-gt-sm>
+      Delete Account<md-icon>delete_forever</md-icon>
+    </md-card>
+  </div>
+
+  <md-subheader class="md-no-sticky">
+    <div class="md-subhead">Change Account Information:</div>
+  </md-subheader>
+  <md-card>
+    <div class="md-subhead">Change Account Details</div>
+    <form flex ng-submit="update(attributes)" ng-init="change='attributes'" role="form">
+      <div class="error" ng-show="error">{{error}}</div>
+      <md-input-container class="md-block">
+        <input type="text"
+               name="Name"
+               placeholder="Name"
+               ng-model="attributes.name"/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text"
+               name="Address"
+               placeholder="Address"
+               ng-model="attributes.address"/>
+      </md-input-container>
+      <md-card-actions>
+        <md-button type="submit" class="block md-raised md-primary">Update</md-button>
+      </md-card-actions>
+    </form>
+  </md-card>
+</div>

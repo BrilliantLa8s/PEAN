@@ -1,0 +1,76 @@
+<md-dialog class="account" ng-controller="AccountCtrl">
+  <!-- Change email address -->
+  <form flex ng-submit="update(updates)" ng-show="change =='email'">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Change Email {{updates.type}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div class="error dialog" ng-show="error">{{error}}</div>
+    <md-dialog-content>
+      <p ng-hide="error">Current Email:&nbsp;&nbsp;<strong>{{currentUser.email}}</strong></p>
+      <md-input-container class="md-block">
+        <input type="email"
+               name="email"
+               placeholder="New Email"
+               ng-model="updates.email"
+               required/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="text"
+               name="password"
+               placeholder="Password Required"
+               ng-model="updates.currentPassword"
+               required/>
+      </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">Cancel</md-button>
+      <span flex></span>
+      <md-button type="submit" class="md-raised md-primary">
+        Change Email
+      </md-button>
+    </md-dialog-actions>
+  </form>
+  <!-- Change Password -->
+  <form flex ng-submit="update(updates)" ng-show="change=='password'">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Change Password</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <div class="error dialog" ng-show="error">{{error}}</div>
+    <md-dialog-content>
+      <p ng-hide="error"></p>
+      <md-input-container class="md-block">
+        <input type="password"
+               name="newPassword"
+               placeholder="New Password"
+               ng-model="updates.newPassword"
+               required/>
+      </md-input-container>
+      <md-input-container class="md-block">
+        <input type="password"
+               name="currentPassword"
+               placeholder="Current Password"
+               ng-model="updates.currentPassword"
+               required/>
+      </md-input-container>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cancel()">Cancel</md-button>
+      <span flex></span>
+      <md-button type="submit" class="md-raised md-primary">
+        Change Password
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

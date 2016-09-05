@@ -1,9 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
-body {
-
-}
+html, body { height: 100%; }
 .container {
   max-width:1000px;
   margin:0 auto;
@@ -13,6 +11,11 @@ body {
 }
 .error {
   color:red;
+  &.dialog {
+    color: red;
+    background: rgba(255,0,0,0.1);
+    padding: 15px 20px;
+  }
 }
 *[no-select] {
   @include user-select(none);

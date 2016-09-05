@@ -28,13 +28,13 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider){
   })
   .state('account.update', {
     url:'/update',
-    templateUrl: 'account/account.html',
+    templateUrl: 'account/update.html',
     controller: 'AccountCtrl'
   })
   .state('account.identities', {
     url:'/identities',
     templateUrl: 'account/identities.html',
-    controller: 'AccountCtrl'
+    controller: 'IdentitiesCtrl'
   })
   .state('account.settings', {
     url:'/settings',

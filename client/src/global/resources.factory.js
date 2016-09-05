@@ -16,12 +16,12 @@ app.factory('Resource', function($http) {
         return err
       });
     },
-    save: function(path, param){
-      return $http.patch('/api/'+path+'/'+param)
+    save: function(path, param, body){
+      return $http.put('/api/'+path+'/'+param, body)
       .then(function(resp){
-        if(resp.status == 200) return resp.data; return;
+        return resp;
       }).catch(function(err){
-        return err
+        return err;
       });
     },
     delete: function(path, param){
