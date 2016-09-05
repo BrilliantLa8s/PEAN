@@ -2,7 +2,16 @@
 
 module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define('User', {
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      unique: {
+        args: true,
+        msg: 'This email is already in use'
+      },
+      validate: {
+        isEmail: true
+      }
+    },
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     admin: {

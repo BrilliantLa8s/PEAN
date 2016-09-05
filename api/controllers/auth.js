@@ -25,8 +25,10 @@ router.post('/authenticate', function(req, res) {
     if(req.body.type === 'register'){
       if(user){
         res.status(404).send(error.auth.reg.taken);
-      } else if(req.body.password != req.body.password_confirmation) {
-        res.status(404).send(error.auth.reg.mismatch)
+      } else if(!auth.validate('password', req.body.password)){
+        res.status(404).send(error.auth.invalid.password);
+      } else if(req.body.password !== req.body.password_confirmation) {
+        res.status(404).send(error.auth.reg.mismatch);
       } else {
         model.User.create({
           email: req.body.email,
