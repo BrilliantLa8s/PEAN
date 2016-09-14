@@ -65,6 +65,10 @@ gulp.task('build:html', function(){
     .pipe(connect.reload());
 });
 
+gulp.task('setEnvVariables', shell.task([
+  'node lib/clientenv.js'
+]));
+
 gulp.task('clean', function() {
   del.sync(build+'*');
 });
@@ -103,7 +107,7 @@ gulp.task('serve', function () {
 });
 
 // Main tasks
-gulp.task('build', ['clean', 'build:vendor:js', 'build:vendor:css', 'build:js', 'build:css', 'build:html']);
+gulp.task('build', ['clean', 'build:vendor:js', 'build:vendor:css', 'build:js', 'build:css', 'build:html', 'setEnvVariables']);
 gulp.task('default', ['build']);
 gulp.task('watch', ['watch:styles','watch:scripts','watch:views']);
 
