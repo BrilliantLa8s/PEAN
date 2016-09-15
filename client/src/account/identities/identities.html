@@ -1,0 +1,69 @@
+<div id="identities">
+<md-subheader>
+  <div class="md-subhead" layout="row">
+    Social Identities
+    <span flex></span>
+    <md-icon hide show-gt-xs>public</md-icon>
+    <md-menu hide-gt-xs md-position-mode="target-right target">
+      <span ng-click="$mdOpenMenu($event)">
+        Add<md-icon>arrow_drop_down</md-icon>
+      </span>
+      <md-menu-content width="3">
+        <md-menu-item ng-repeat="provider in providers">
+          <md-button ng-click="addIdentity(provider)"
+            ng-disabled="connected.indexOf(provider)!=-1"
+            class="md-primary identities">
+            {{provider}}<span flex></span>
+            <md-icon ng-show="connected.indexOf(provider)!=-1">settings_ethernet</md-icon>
+            <md-icon ng-hide="connected.indexOf(provider)!=-1">person_add</md-icon>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
+</md-subheader>
+<md-divider></md-divider>
+<md-content class="md-padding" layout-xs="column" layout="row">
+  <div hide show-gt-xs flex-gt-xs="30" layout="column">
+    <md-list>
+      <md-list-item ng-repeat="provider in providers">
+        <md-button flex ng-click="addIdentity(provider)"
+          ng-disabled="connected.indexOf(provider)!=-1"
+          class="md-primary">
+          <span layout="row" hide show-gt-xs>
+            {{provider}}
+            <span flex></span>
+            <md-icon ng-show="connected.indexOf(provider)!=-1">settings_ethernet</md-icon>
+            <md-icon ng-hide="connected.indexOf(provider)!=-1">person_add</md-icon>
+          </span>
+        </md-button>
+        <md-divider></md-divider>
+      </md-list-item>
+    </md-list>
+  </div>
+  <div flex-xs="100" flex-gt-xs="70" layout="column">
+    <md-card ng-repeat="identity in user.Identities">
+      <md-card-title>
+        <md-card-title-text ng-if="identity.provider == 'instagram'">
+          <span class="md-headline" ng-bind="identity.provider"></span>
+          <span class="md-subhead" ng-bind="identity.userInfo.username"></span>
+          <span class="md-subhead" ng-bind="identity.userInfo.full_name"></span>
+        </md-card-title-text>
+        <md-card-title-text ng-if="identity.provider == 'facebook'">
+          <span class="md-headline" ng-bind="identity.provider"></span>
+          <span class="md-subhead" ng-bind="identity.userInfo.name"></span>
+          <span class="md-subhead" ng-bind="identity.userInfo.email"></span>
+        </md-card-title-text>
+        <md-card-title-media>
+          <div class="md-media-sm card-media">
+            <img ng-src="{{identity.userInfo.profile_picture}}">
+          </div>
+        </md-card-title-media>
+      </md-card-title>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button ng-click="removeIdentity(identity.provider, $index)">Remove Identity</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+</md-content>
+</div>

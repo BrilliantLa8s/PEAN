@@ -1,0 +1,8 @@
+@mixin user-select($value){
+  user-select: $value;
+  -ms-user-select: $value; /* Internet Explorer */
+  -moz-user-select: $value; /* Firefox */
+  -khtml-user-select: $value; /* KHTML browsers (e.g. Konqueror) */
+  -webkit-user-select: $value; /* Chrome, Safari, and Opera */
+  -webkit-touch-callout: $value; /* Disable Android and iOS callouts*/
+}

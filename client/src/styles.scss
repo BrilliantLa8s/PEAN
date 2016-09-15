@@ -1,19 +1,50 @@
-$theme1: #C1676F;
-$theme2: #DF8797;
-$theme3: #EDBEC8;
-$theme4: #94B7BB;
-$theme5: #ACC6C9;
-$theme6: #C6B170;
-$theme7: #E2D1A6;
+@import 'variables';
+@import 'mixins';
 
-body {
-
+html, body { height: 100%; }
+.container {
+  max-width:1000px;
+  margin:0 auto;
+  @media(min-width:600px) {
+    padding:0 15px;
+  }
 }
-
 .error {
   color:red;
+  &.dialog {
+    color: red;
+    background: rgba(255,0,0,0.1);
+    padding: 15px 20px;
+  }
+}
+*[no-select] {
+  @include user-select(none);
+}
+*[pointer] {
+  cursor:pointer;
+}
+*:focus {
+  outline: none;
+  // border: 0;
+}
+*[stretch] {
+  width:100%;
+}
+md-progress-circular {
+  z-index:1000;
+  position:fixed;
+  margin-top:-65px;
+  width:100%!important;
+  height:100%!important;
+  background: rgba(255,255,255,0.8);
+  & svg {
+    position:relative;
+    left:calc(50% - 25px);
+    top:42%;
+  }
 }
 
 @import 'main/main';
 @import 'auth/auth';
 @import 'navbar/navbar';
+@import 'account/account';

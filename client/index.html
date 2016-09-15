@@ -11,6 +11,10 @@
   <!-- Main Navigation -->
   <div><navbar></navbar></div>
   <!-- Main View -->
+  <md-progress-circular
+    md-mode="indeterminate"
+    ng-show="isLoading">
+  </md-progress-circular>
   <div ui-view></div>
   <!-- Angular Libraries -->
   <script src="build/vendor.js"></script>

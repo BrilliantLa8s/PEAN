@@ -1,3 +1,5 @@
+.env
+
 # Build directory
 client/build
 

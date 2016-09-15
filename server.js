@@ -1,10 +1,15 @@
 'use strict';
 
+require('dotenv').config();
+
 var bodyParser = require('body-parser');
 var models = require('./api/models');
 var auth = require('./api/helpers/auth');
+var cors = require('cors');
 var express = require('express');
 var app = express();
+
+app.use(cors());
 
 // Parse body as JSON
 app.use(bodyParser.json());
@@ -22,6 +27,7 @@ app.use(function(req, res, next) {
 app.use('/api/auth', require('./api/controllers/auth'));
 app.use('/api/users', require('./api/controllers/users'));
 app.use('/api/posts', require('./api/controllers/posts'));
+app.use('/api/identities', require('./api/controllers/identities'));
 
 // Serve Application
 app.set('port', process.env.PORT || 3000);

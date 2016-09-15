@@ -2,8 +2,10 @@
 
 var model = require('../models/index');
 var auth = require('../helpers/auth');
+var oauth = require('../helpers/oauth');
 var vars = require('../../config/vars');
 var error = require('../../config/errors');
+var cipher = require('../helpers/cipher');
 var bcrypt = require('bcryptjs');
 var express = require('express');
 var router = express.Router();
@@ -23,8 +25,10 @@ router.post('/authenticate', function(req, res) {
     if(req.body.type === 'register'){
       if(user){
         res.status(404).send(error.auth.reg.taken);
-      } else if(req.body.password != req.body.password_confirmation) {
-        res.status(404).send(error.auth.reg.mismatch)
+      } else if(!auth.validate('password', req.body.password)){
+        res.status(404).send(error.auth.invalid.password);
+      } else if(req.body.password !== req.body.password_confirmation) {
+        res.status(404).send(error.auth.reg.mismatch);
       } else {
         model.User.create({
           email: req.body.email,
@@ -56,6 +60,34 @@ router.post('/authenticate', function(req, res) {
     }
   }).catch(function(err){
     res.send(err)
+  });
+});
+
+// Oauth provider authorize/access
+router.post('/authorize', function(req, res){
+  oauth.authorize(req.headers.origin, req.body.provider)
+  .then(function(resp){
+    res.status(200).send(resp)
+  }).catch(function(err){
+    console.log(err);res.send(false);
+  });
+});
+
+router.get('/callback', function(req, res){
+  var origin = `${req.protocol}://${req.headers.host}`
+  oauth.token(origin, req.query.provider, req.query.code)
+  .then(function(obj){
+    console.log(obj)
+    model.Identity.create({
+      provider: req.query.provider,
+      accessToken: obj.access_token,
+      userInfo: obj.user
+    }).then(function(identity){
+      var id = cipher.encrypt(`0000${identity.id}`)
+      res.redirect(`/identity/${id}`);
+    }).catch(function(err){console.log(err)});
+  }).catch(function(err){
+    console.log(err);res.send(false);
   });
 });
 

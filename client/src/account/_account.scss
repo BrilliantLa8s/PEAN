@@ -1,0 +1,96 @@
+md-dialog.account {
+  width:450px;
+  height:350px;
+  & md-dialog-content{
+    overflow: hidden;
+    margin:20px;
+    & p {
+      color: #777;
+      margin: 0 0 30px 0;
+    }
+  }
+  & md-dialog-actions{
+    position:absolute;
+    bottom:0;left:0;right:0;
+    background: #f5f5f5;
+    padding: 10px 20px 10px 10px;
+    border-top: 1px solid #ddd;
+  }
+}
+
+#account {
+  @media(min-width:600px) {
+    margin:20px 0;
+  }
+  & md-sidenav {
+    overflow:hidden;
+    z-index:1;
+    border-right:1px solid $theme1;
+    & .md-subheader {
+      background:transparent;
+      border-bottom:1px solid #eee;
+    }
+    & .md-button {
+      text-transform:initial;
+      color:#555;
+    }
+  }
+}
+
+#update {
+  padding-bottom:5px;
+  & md-card {
+    margin: 0 20px 20px 20px;
+    padding: 25px 30px 15px;
+    & .md-subhead {
+      margin-bottom: 30px;
+      color: #777;
+    }
+    & md-input-container {
+      margin:0;
+    }
+    & md-card-actions {
+      margin:0;
+    }
+  }
+  & .square {
+    margin:20px;
+    height:150px;
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:2px;
+  }
+  & .card-buttons {
+    margin:0 15px 10px;
+    & md-card {
+      margin:0 5px;
+      padding:25px 0;
+      text-align:center;
+      color:#777;
+      line-height:18px;
+      white-space:nowrap;
+      overflow:hidden;
+      cursor:pointer;
+    }
+  }
+}
+
+md-menu-item >.md-button.identities md-icon {
+  margin:auto 0;
+}
+#identities {
+  & .md-menu {
+    padding:0;
+  }
+  & md-list {
+    margin-right:10px;
+    & md-list-item {
+      & .md-button {
+        &:hover {
+          background:transparent;
+        }
+      }
+    }
+  }
+}

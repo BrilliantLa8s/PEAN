@@ -1,19 +1,45 @@
-<!-- Main Nav -->
+<!-- Main/Auth Nav -->
 <md-toolbar class="md-whiteframe-1dp">
   <div class="container md-toolbar-tools navbar">
-    <a ui-sref="main" href="#" >
-      <span hide show-gt-sm>PEAN</span>
+    <!-- Mobile menu button -->
+    <span hide-gt-sm>
+      <md-button
+        aria-label="User Settings"
+        ng-click="toggleLeft()"
+        ng-if="currentUser">
+        <md-icon>menu</md-icon>
+      </md-button>
+    </span>
+    <span flex hide-gt-sm></span>
+    <a class="brand" ui-sref="main" href="#" >
+      <span>PEAN</span>
     </a>
-    <span flex="5"></span>
-    <span layout="row">
-      <md-button ng-repeat="nav in main"
+    <span hide show-gt-sm layout="row">
+      <md-button ng-repeat="nav in mainmenu"
         ui-sref-active="active" ui-sref="{{nav.state}}">
-        <md-icon ng-if="nav.icon">{{nav.icon}}</md-icon>
-        <span hide show-gt-sm>{{nav.link}}</span>
-        <md-tooltip hide-gt-sm>{{nav.link}}</md-tooltip>
+        <!-- <md-icon ng-if="nav.icon">{{nav.icon}}</md-icon> -->
+        <span>{{nav.link}}</span>
       </md-button>
     </span>
     <span flex></span>
-    <ng-include src="'auth/_authmenu.html'"></ng-include>
+    <!-- Moblie login button -->
+    <md-button ui-sref-active="active" ui-sref="login" ng-if="!currentUser" hide-gt-sm>
+      <span>Login</span>
+    </md-button>
+    <!-- Mobile account button -->
+    <md-button hide-gt-sm
+      aria-label="User Settings"
+      ng-click="toggleRight()"
+      ng-if="currentUser">
+      <md-icon>person</md-icon>
+    </md-button>
+    <!-- Non-mobile account menu -->
+    <ng-include src="'auth/_authmenu.html'" hide show-gt-sm></ng-include>
   </div>
 </md-toolbar>
+
+<!-- Mobile nav menu -->
+<ng-include src="'navbar/_navbarmobile.html'"></ng-include>
+
+<!-- Mobile account menu -->
+<ng-include src="'auth/_authmenumobile.html'"></ng-include>

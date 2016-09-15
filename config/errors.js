@@ -4,6 +4,10 @@ module.exports = {
   en:{
     auth:{
       unable: 'Unable to process your request',
+      change: 'Current password is incorrect',
+      invalid: {
+        password: 'Password doesn\'t meet criteria'
+      },
       reg:{
         taken: 'This email address is already registered',
         mismatch: 'Passwords do not match',
